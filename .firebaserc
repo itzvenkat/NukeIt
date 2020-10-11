@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "nukeit-x"
+  },
+  "targets": {
+    "nukeit-x": {
+      "hosting": {
+        "NukeIt": [
+          "nukeit-x"
+        ]
+      }
+    }
   }
 }
