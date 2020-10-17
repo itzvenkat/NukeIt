@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
 
   deferredPrompt: any;
   showButton = false;
+
   @HostListener('window:beforeinstallprompt', ['$event'])
   onbeforeinstallprompt(e) {
     console.log(e);
@@ -17,10 +18,11 @@ export class AppComponent implements OnInit {
     this.deferredPrompt = e;
     this.showButton = true;
   }
+
   addToHomeScreen() {
     this.showButton = false;
-    this.deferredPrompt.prompt();
-    this.deferredPrompt.userChoice
+    this.deferredPrompt?.prompt();
+    this.deferredPrompt?.userChoice
       .then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
           console.log('User accepted the A2HS prompt');
