@@ -1,1 +1,36 @@
-<p>sms works!</p>
+<div class="container-fluid bg-faded py-3">
+  <div class="row">
+    <div class="col-12">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar><img src="/assets/icons/radioactive.svg" height="45px"></div>
+          <mat-card-title>About to Nuke</mat-card-title>
+          <mat-card-subtitle>Go hide in your bunker</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="mb-0">
+          <mat-form-field hintLabel="Max 10 characters" appearance="outline" class="w-100 mb-2">
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="tel" placeholder="Ex: 9501795017" #input maxlength="10" autocomplete="off">
+            <img matSuffix src="/assets/icons/phone.svg" class="img-fix" style="vertical-align: unset;">
+            <mat-hint align="end">{{input?.value?.length || 0}}/10</mat-hint>
+          </mat-form-field>
+          <mat-form-field hintLabel="Max 150" appearance="outline" class="w-100 mb-4">
+            <mat-label>Count</mat-label>
+            <input matInput type="tel" placeholder="Ex: 10" maxlength="3" autocomplete="off">
+            <img matSuffix src="/assets/icons/counting.svg" class="img-fix" style="vertical-align: unset;">
+          </mat-form-field>
+          <div>
+            <label for="delay" class="mr-3">Delay</label>
+            <mat-slider id="delay" thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="1" max="5"
+              [(ngModel)]="delay" style="width: 80%;">
+            </mat-slider>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button color="accent">Fall Back</button>
+          <button mat-raised-button color="primary">Deploy</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

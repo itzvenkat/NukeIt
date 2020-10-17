@@ -7,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class SmsComponent implements OnInit {
-
+  delay = 3;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  formatLabel(value: number): number | string {
+    if (value) return `${Number(value)}s`;
+    return value;
   }
 
 }
