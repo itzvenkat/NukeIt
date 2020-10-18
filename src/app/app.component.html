@@ -1,6 +1,6 @@
 <div class="example-container fill" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="example-toolbar" style="height: 54px;">
-    <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="snav.toggle()">
+    <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="snav?.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <h1 class="example-app-name ml-3">NukeIt</h1>
@@ -8,9 +8,17 @@
 
   <mat-sidenav-container class="example-sidenav-container" style="height: calc(100% - 54px);">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56" [style.width]="mobileQuery.matches ? '47%' : '17%'">
+      fixedTopGap="56" [opened]="isShowing" [style.width]="mobileQuery.matches ? '47%' : '17%'">
       <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+        <a mat-list-item routerLink="/sms" routerLinkActive="active-link"><img src="/assets/icons/sms.svg"
+            class="img-fix mr-3">SMS</a>
+        <a mat-list-item routerLink="/call" routerLinkActive="active-link"><img src="/assets/icons/telephone-call.svg"
+            class="img-fix mr-3">Call</a>
+        <a mat-list-item routerLink="/schedule" routerLinkActive="active-link"><img src="/assets/icons/schedule.svg"
+            class="img-fix mr-3">Schedule</a>
+        <!-- <a mat-list-item routerLink="." routerLinkActive="active-link"><img src="/assets/icons/schedule.svg"
+              class="img-fix mr-3">About</a> -->
+        <!-- <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a> -->
       </mat-nav-list>
     </mat-sidenav>
 

@@ -12,6 +12,33 @@ export class AppComponent implements OnInit, OnDestroy {
   deferredPrompt: any;
   showButton = false;
 
+  isShowing: boolean = false;
+
+  ngOnInit(): void {
+    this.onResize();
+  }
+
+  mobileQuery: MediaQueryList;
+  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
+
+  private _mobileQueryListener: () => void;
+
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener('change', this._mobileQueryListener)
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener('change', this._mobileQueryListener)
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    if (this.mobileQuery?.matches) this.isShowing = false
+    else this.isShowing = true
+  }
+
   @HostListener('window:beforeinstallprompt', ['$event'])
   onbeforeinstallprompt(e) {
     console.log(e);
@@ -32,22 +59,5 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         this.deferredPrompt = null;
       });
-  }
-
-  ngOnInit() { }
-
-  mobileQuery: MediaQueryList;
-  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
-
-  private _mobileQueryListener: () => void;
-
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener('change', this._mobileQueryListener)
-  }
-
-  ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener('change', this._mobileQueryListener)
   }
 }
